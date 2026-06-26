@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>長照帳戶兩大建立管道｜完整優化配置表</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@300;400;500;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=EB+Garamond:ital@0;1&display=swap');
+
+  :root {
+    /* Hero（保留深棕奢華） */
+    --hero-bg:    #2C1F14;
+    --hero-bg2:   #1A0F08;
+    --gold:       #C8A96E;
+    --gold2:      #E8C88A;
+    --cream-hero: #F0E6D3;
+    --cream-hero2:#C9B89A;
+    --cream-hero3:#A08060;
+
+    /* 主內容區：淺色，高對比 */
+    --bg:         #FAF7F2;
+    --bg2:        #F3EDE3;
+    --card:       #FFFFFF;
+    --border:     #D6C9B5;
+    --border2:    #BFB09A;
+
+    /* 文字 */
+    --text:       #1A1209;
+    --text2:      #3D2E1E;
+    --text3:      #6B5540;
+    --gold-dk:    #8B6914;
+
+    /* 方案色 */
+    --plan1-bg:   #EBF1FB;
+    --plan1-hd:   #1B3A6B;
+    --plan1-text: #1B3A6B;
+    --plan2-bg:   #FEF3E6;
+    --plan2-hd:   #8B3A00;
+    --plan2-text: #7A3000;
+
+    /* 條件綠 */
+    --green-bg:   #E8F6EE;
+    --green-text: #0D5E2A;
+    --green-bdr:  #A8D8B8;
+
+    /* 關鍵行金色 */
+    --key-bg:     #FFF8E1;
+    --key-bdr:    #E8C84A;
+    --key-label:  #6B4C00;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Noto Serif TC', serif;
+    min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ── 頂部橫幅（保留深色奢華） ── */
+  .hero {
+    background: linear-gradient(180deg, var(--hero-bg2) 0%, var(--hero-bg) 100%);
+    text-align: center;
+    padding: 52px 32px 48px;
+    border-bottom: 3px solid var(--gold);
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse 60% 50% at 50% 0%, rgba(200,169,110,0.1) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .hero-ornament {
+    display: flex; align-items: center; justify-content: center; gap: 16px;
+    margin-bottom: 24px;
+  }
+  .hero-ornament-line { width: 60px; height: 1px; background: var(--gold); opacity: 0.6; }
+  .hero-ornament-diamond { width: 8px; height: 8px; background: var(--gold); transform: rotate(45deg); }
+  .hero-en {
+    font-family: 'EB Garamond', serif;
+    font-style: italic;
+    font-size: 16px;
+    color: var(--cream-hero3);
+    letter-spacing: 0.14em;
+    margin-bottom: 14px;
+  }
+  .hero-title {
+    font-size: clamp(26px, 5vw, 44px);
+    font-weight: 700;
+    color: var(--cream-hero);
+    letter-spacing: 0.06em;
+    line-height: 1.25;
+    margin-bottom: 18px;
+  }
+  .hero-title span { color: var(--gold2); }
+  .hero-sub {
+    font-family: 'EB Garamond', serif;
+    font-style: italic;
+    font-size: 15px;
+    color: var(--cream-hero2);
+    letter-spacing: 0.05em;
+    line-height: 1.8;
+    max-width: 620px;
+    margin: 0 auto;
+  }
+
+  /* ── 主內容 ── */
+  .main {
+    max-width: 920px; margin: 0 auto; padding: 44px 24px 64px;
+    background: var(--bg);
+  }
+
+  /* ── Section 標題 ── */
+  .section-header {
+    display: flex; align-items: center; gap: 14px;
+    margin-bottom: 20px;
+    background: var(--bg);
+    padding: 12px 0 4px;
+  }
+  .section-num {
+    font-family: 'EB Garamond', serif;
+    font-style: italic;
+    font-size: 13px;
+    color: var(--gold-dk);
+    letter-spacing: 0.2em;
+    background: var(--bg2);
+    border: 1px solid var(--border2);
+    padding: 4px 10px;
+    flex-shrink: 0;
+  }
+  .section-line { flex: 0 0 20px; height: 1px; background: var(--border2); flex-shrink: 0; }
+  .section-title-zh {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--text);
+    letter-spacing: 0.05em;
+  }
+  .section-title-en {
+    font-family: 'EB Garamond', serif;
+    font-style: italic;
+    font-size: 12px;
+    color: var(--text3);
+    letter-spacing: 0.1em;
+    margin-top: 3px;
+  }
+  .section-badge {
+    margin-left: auto;
+    border: 1px solid var(--border2);
+    padding: 4px 12px;
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    color: var(--text3);
+    font-family: 'EB Garamond', serif;
+    background: var(--bg2);
+    flex-shrink: 0;
+  }
+
+  /* ── 比較卡片 ── */
+  .compare-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    margin-bottom: 44px;
+    box-shadow: 0 2px 12px rgba(60,40,20,0.07);
+    position: relative;
+    overflow: hidden;
+  }
+  .compare-card::before {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0; height: 3px;
+    background: linear-gradient(90deg, transparent 0%, var(--gold) 40%, var(--gold2) 60%, transparent 100%);
+  }
+
+  /* 方案標題行 */
+  .plan-headers {
+    display: grid;
+    grid-template-columns: 22% 1fr 1fr;
+    border-bottom: 2px solid var(--border);
+  }
+  .plan-label-empty {
+    padding: 20px 16px;
+    background: var(--bg2);
+    border-right: 1px solid var(--border);
+  }
+  .plan-header {
+    padding: 24px 20px 20px;
+    text-align: center;
+    border-left: 1px solid var(--border);
+  }
+  .plan-header.plan1 { background: var(--plan1-bg); }
+  .plan-header.plan2 { background: var(--plan2-bg); }
+  .plan-num {
+    font-family: 'EB Garamond', serif;
+    font-style: italic;
+    font-size: 12px;
+    letter-spacing: 0.15em;
+    margin-bottom: 6px;
+  }
+  .plan1 .plan-num { color: var(--plan1-text); }
+  .plan2 .plan-num { color: var(--plan2-text); }
+  .plan-name-zh {
+    font-size: 22px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    margin-bottom: 4px;
+  }
+  .plan1 .plan-name-zh { color: var(--plan1-hd); }
+  .plan2 .plan-name-zh { color: var(--plan2-hd); }
+  .plan-name-en {
+    font-family: 'EB Garamond', serif;
+    font-style: italic;
+    font-size: 13px;
+    letter-spacing: 0.08em;
+    margin-bottom: 12px;
+  }
+  .plan1 .plan-name-en { color: #4A6FA5; }
+  .plan2 .plan-name-en { color: #9B5020; }
+  .plan-tag {
+    display: inline-block;
+    border: 1px solid;
+    padding: 4px 12px;
+    font-size: 12px;
+    letter-spacing: 0.06em;
+    border-radius: 2px;
+  }
+  .plan1 .plan-tag { border-color: #7DA8D8; color: var(--plan1-text); background: #fff; }
+  .plan2 .plan-tag { border-color: #D4843A; color: var(--plan2-text); background: #fff; }
+
+  /* 比較行 */
+  .compare-row {
+    display: grid;
+    grid-template-columns: 22% 1fr 1fr;
+    border-bottom: 1px solid var(--border);
+    transition: background 0.12s;
+  }
+  .compare-row:last-child { border-bottom: none; }
+  .compare-row.key-row { background: var(--key-bg); border-left: 4px solid var(--key-bdr); }
+  .compare-row:not(.key-row):hover { background: #F8F4EE; }
+
+  .row-label {
+    padding: 15px 16px;
+    border-right: 1px solid var(--border);
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--text2);
+    letter-spacing: 0.04em;
+    line-height: 1.55;
+    display: flex; align-items: center;
+    background: var(--bg2);
+  }
+  .key-row .row-label { color: var(--key-label); background: #FFF3C4; }
+
+  .row-val {
+    padding: 15px 18px;
+    font-size: 14px;
+    color: var(--text2);
+    line-height: 1.7;
+    border-right: 1px solid var(--border);
+    display: flex; align-items: center;
+  }
+  .row-val:last-child { border-right: none; }
+  .row-val.plan2-val { color: var(--text); }
+
+  /* ── 條件表 ── */
+  .cond-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    margin-bottom: 44px;
+    box-shadow: 0 2px 12px rgba(60,40,20,0.07);
+    position: relative;
+    overflow: hidden;
+  }
+  .cond-card::before {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0; height: 3px;
+    background: linear-gradient(90deg, transparent 0%, var(--gold) 40%, var(--gold2) 60%, transparent 100%);
+  }
+  .cond-headers {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    border-bottom: 2px solid var(--border);
+  }
+  .cond-header {
+    padding: 16px 18px;
+    text-align: center;
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    border-right: 1px solid var(--border);
+  }
+  .cond-header:last-child { border-right: none; }
+  .cond-header.h-label  { color: var(--text2); background: var(--bg2); }
+  .cond-header.h-plan1  { color: var(--plan1-hd); background: var(--plan1-bg); }
+  .cond-header.h-plan2  { color: var(--green-text); background: var(--green-bg); }
+  .cond-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    border-bottom: 1px solid var(--border);
+  }
+  .cond-row:last-child { border-bottom: none; }
+  .cond-cell {
+    padding: 18px 18px;
+    font-size: 14px;
+    line-height: 1.7;
+    border-right: 1px solid var(--border);
+    display: flex; align-items: center;
+  }
+  .cond-cell:last-child { border-right: none; }
+  .cond-cell.c-label { font-weight: 700; color: var(--text); background: var(--bg2); }
+  .cond-cell.c-plan1 { color: var(--text2); }
+  .cond-cell.c-plan2 {
+    color: var(--green-text);
+    font-weight: 700;
+    background: var(--green-bg);
+    border-left: 3px solid var(--green-bdr);
+  }
+
+  /* ── 行動建議 ── */
+  .tips-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 14px;
+    margin-bottom: 44px;
+  }
+  .tip-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-top: 3px solid var(--gold);
+    padding: 22px 22px 20px;
+    box-shadow: 0 2px 8px rgba(60,40,20,0.05);
+  }
+  .tip-icon { font-size: 22px; margin-bottom: 10px; display: block; }
+  .tip-text { font-size: 14px; color: var(--text2); line-height: 1.75; }
+  .tip-text strong { color: var(--text); }
+
+  /* ── CTA ── */
+  .cta-block {
+    text-align: center;
+    padding: 44px 24px;
+    background: var(--hero-bg);
+    border: none;
+    position: relative;
+    overflow: hidden;
+    margin-bottom: 32px;
+  }
+  .cta-block::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse 70% 60% at 50% 100%, rgba(200,169,110,0.08), transparent 70%);
+    pointer-events: none;
+  }
+  .cta-block::after {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0; height: 3px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  }
+  .cta-ornament {
+    display: flex; align-items: center; justify-content: center; gap: 12px;
+    margin-bottom: 20px;
+  }
+  .cta-ornament-line { width: 40px; height: 1px; background: var(--gold); opacity: 0.5; }
+  .cta-ornament-diamond { width: 6px; height: 6px; background: var(--gold); transform: rotate(45deg); }
+  .cta-title {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--cream-hero);
+    letter-spacing: 0.06em;
+    line-height: 1.7;
+    margin-bottom: 28px;
+  }
+  .cta-btn {
+    display: inline-flex; align-items: center; gap: 10px;
+    background: #06C755;
+    color: #fff;
+    text-decoration: none;
+    padding: 17px 40px;
+    font-family: 'Noto Serif TC', serif;
+    font-size: 16px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    border: 2px solid rgba(255,255,255,0.3);
+    cursor: pointer;
+    transition: background 0.2s, transform 0.15s;
+  }
+  .cta-btn:hover { background: #038A3B; transform: translateY(-2px); }
+
+  /* ── 免責聲明 ── */
+  .disclaimer {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+    font-size: 13px;
+    color: var(--text3);
+    line-height: 2.0;
+    letter-spacing: 0.02em;
+    background: var(--bg);
+  }
+
+  @media (max-width: 620px) {
+    .plan-headers, .compare-row { grid-template-columns: 28% 1fr 1fr; }
+    .row-label { font-size: 12px; padding: 12px 10px; }
+    .row-val { font-size: 12px; padding: 12px 10px; }
+    .plan-name-zh { font-size: 17px; }
+    .cond-cell { font-size: 12px; padding: 12px 10px; }
+    .tips-grid { grid-template-columns: 1fr; }
+    .hero-title { font-size: 24px; }
+    .cta-title { font-size: 15px; }
+    .cta-btn { font-size: 14px; padding: 14px 20px; }
+    .disclaimer { font-size: 12px; }
+    .section-title-zh { font-size: 15px; }
+    .main { padding: 28px 16px 48px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ── 頂部橫幅 ── -->
+<div class="hero">
+  <div class="hero-ornament">
+    <div class="hero-ornament-line"></div>
+    <div class="hero-ornament-diamond"></div>
+    <div class="hero-ornament-line"></div>
+  </div>
+  <div class="hero-en">Long-Term Care Account Establishment Guide</div>
+  <h1 class="hero-title">長照帳戶兩大建立管道<span>｜</span>完整優化配置表</h1>
+  <p class="hero-sub">老後的錢，要能「連續穩定給付、無法被挪用、風險提早也能立刻啟動」<br>——你現在的方案，三個條件都達標了嗎？</p>
+</div>
+
+<!-- ── 主內容 ── -->
+<div class="main">
+
+  <!-- ── 01 全方位比較 ── -->
+  <div class="section-header">
+    <div>
+      <div class="section-num">01</div>
+    </div>
+    <div class="section-line"></div>
+    <div>
+      <div class="section-title-zh">兩大管道全方位比較</div>
+      <div class="section-title-en">Full Comparison</div>
+    </div>
+    <div class="section-badge">COMPARE</div>
+  </div>
+
+  <div class="compare-card">
+    <!-- 方案標題 -->
+    <div class="plan-headers">
+      <div class="plan-label-empty"></div>
+      <div class="plan-header plan1">
+        <div class="plan-num">管道一</div>
+        <div class="plan-name-zh">現金信託</div>
+        <div class="plan-name-en">Cash Trust</div>
+        <div class="plan-tag">💰 一次放入大筆現金</div>
+      </div>
+      <div class="plan-header plan2">
+        <div class="plan-num">管道二</div>
+        <div class="plan-name-zh">保險慢慢存</div>
+        <div class="plan-name-en">Insurance Planning</div>
+        <div class="plan-tag">📋 2～3 成預算分年繳保費</div>
+      </div>
+    </div>
+
+    <!-- 比較行 -->
+    <div class="compare-row">
+      <div class="row-label">啟動門檻</div>
+      <div class="row-val">需一次備妥數百萬元現金</div>
+      <div class="row-val plan2-val">每年僅需數萬元保費，門檻低</div>
+    </div>
+    <div class="compare-row">
+      <div class="row-label">資金壓力</div>
+      <div class="row-val">需初期一次性備妥較高資金</div>
+      <div class="row-val plan2-val">分攤至 20 或 30 年，無一次性壓力</div>
+    </div>
+    <div class="compare-row">
+      <div class="row-label">保障啟動時機</div>
+      <div class="row-val">信託帳戶有錢才有保障</div>
+      <div class="row-val plan2-val">繳費後即刻啟動保障（等待期之後）</div>
+    </div>
+    <div class="compare-row key-row">
+      <div class="row-label">提早發病保障<br><small style="font-size:12px;color:var(--key-label);opacity:0.9;">★ 最關鍵條件</small></div>
+      <div class="row-val">⚠️ 需視當時帳戶已累積之實際餘額而定</div>
+      <div class="row-val plan2-val">✅ 繳費第一年起，即享有完整理賠金額，立即啟動每月給付</div>
+    </div>
+    <div class="compare-row">
+      <div class="row-label">持續給付年期</div>
+      <div class="row-val">依帳戶餘額決定，可能提早用完</div>
+      <div class="row-val plan2-val">保單明定 15 或 16 年，給付有保障</div>
+    </div>
+    <div class="compare-row">
+      <div class="row-label">資金被挪用風險</div>
+      <div class="row-val">需依契約規範條款執行</div>
+      <div class="row-val plan2-val">依契約約定專款專用，降低挪用風險</div>
+    </div>
+    <div class="compare-row">
+      <div class="row-label">抗通膨設計</div>
+      <div class="row-val">視投資標的而定，不確定性高</div>
+      <div class="row-val plan2-val">部分商品有通膨調整機制</div>
+    </div>
+    <div class="compare-row">
+      <div class="row-label">預算使用效率</div>
+      <div class="row-val">需全額資產配置，專款專用</div>
+      <div class="row-val plan2-val">僅需 2～3 成預算即可完整啟動保障</div>
+    </div>
+    <div class="compare-row">
+      <div class="row-label">適合族群</div>
+      <div class="row-val">已有資產的高資產族群，或有體況無法投保的客群</div>
+      <div class="row-val plan2-val">一般受薪族、想提早規劃的中青壯年，以及想做資產配置的高資產族群</div>
+    </div>
+  </div>
+
+  <!-- ── 02 三大條件 ── -->
+  <div class="section-header">
+    <div><div class="section-num">02</div></div>
+    <div class="section-line"></div>
+    <div>
+      <div class="section-title-zh">三大嚴苛條件｜兩方案達標對照</div>
+      <div class="section-title-en">Three Critical Requirements</div>
+    </div>
+    <div class="section-badge">CRITERIA</div>
+  </div>
+
+  <div class="cond-card">
+    <div class="cond-headers">
+      <div class="cond-header h-label">條件</div>
+      <div class="cond-header h-plan1">管道一｜現金信託</div>
+      <div class="cond-header h-plan2">管道二｜保險慢慢存</div>
+    </div>
+    <div class="cond-row">
+      <div class="cond-cell c-label">① 能連續穩定給付 8～15 年，不能提早用完</div>
+      <div class="cond-cell c-plan1">⚠️ 提領年限依實際存入之總本金與配置而定</div>
+      <div class="cond-cell c-plan2">✅ 保單明定給付年期，合約保障不中斷</div>
+    </div>
+    <div class="cond-row">
+      <div class="cond-cell c-label">② 帳戶鎖死，不可被挪用去買股票或買房</div>
+      <div class="cond-cell c-plan1">⚠️ 需依信託契約條款規範執行</div>
+      <div class="cond-cell c-plan2">✅ 理賠啟動後保單凍結，無法解約質借</div>
+    </div>
+    <div class="cond-row">
+      <div class="cond-cell c-label">③ 最嚴苛：風險提早發生，立刻每月給付數萬元</div>
+      <div class="cond-cell c-plan1">⚠️ 初期若資產尚未到位，需由其他資產支應</div>
+      <div class="cond-cell c-plan2">✅ 第一年起即享完整保障，不因存款不足而縮水</div>
+    </div>
+  </div>
+
+  <!-- ── 03 行動建議 ── -->
+  <div class="section-header">
+    <div><div class="section-num">03</div></div>
+    <div class="section-line"></div>
+    <div>
+      <div class="section-title-zh">給你的行動建議</div>
+      <div class="section-title-en">Action Guide</div>
+    </div>
+    <div class="section-badge">GUIDE</div>
+  </div>
+
+  <div class="tips-grid">
+    <div class="tip-card">
+      <span class="tip-icon">💡</span>
+      <p class="tip-text">手邊有 300 萬以上閒置現金，且不考慮提早發病風險<br>→ <strong>現金信託可作為補充工具</strong></p>
+    </div>
+    <div class="tip-card">
+      <span class="tip-icon">🛡️</span>
+      <p class="tip-text">希望用最低預算、立刻啟動完整保障，對抗「錢還沒存夠就先倒下」的風險<br>→ <strong>長照保險是目前最有效率的解方</strong></p>
+    </div>
+    <div class="tip-card">
+      <span class="tip-icon">⭐</span>
+      <p class="tip-text">最理想配置<br>→ <strong>保險為主</strong>（建立基礎保障）<br>＋ <strong>信託為輔</strong>（累積備用準備金）</p>
+    </div>
+    <div class="tip-card">
+      <span class="tip-icon">⏰</span>
+      <p class="tip-text">保費通常隨年齡增長而遞增（實際依各險種費率表為準），核保限制愈多<br>→ <strong>現在就是最好的時機</strong></p>
+    </div>
+  </div>
+
+  <!-- ── CTA ── -->
+  <div class="cta-block">
+    <div class="cta-ornament">
+      <div class="cta-ornament-line"></div>
+      <div class="cta-ornament-diamond"></div>
+      <div class="cta-ornament-line"></div>
+    </div>
+    <p class="cta-title">
+      你想知道以你目前的年齡和預算，<br>
+      如何打造最適合自己的長照帳戶？
+    </p>
+    <a class="cta-btn" href="https://lin.ee/Ot8WhIM" target="_blank">
+      📲 &nbsp;加入官方 LINE｜預約 1 對 1 資產配置諮詢
+    </a>
+  </div>
+
+  <!-- ── 免責聲明 ── -->
+  <p class="disclaimer">
+    本資料僅供觀念探討與配置參考，具體保險商品之給付條件、費率及限制，請詳閱各保險公司保單條款；信託業務之設立與規範請洽各信託機構。理財規劃請依個人實際財務狀況評估。
+  </p>
+
+</div>
+</body>
+</html>
